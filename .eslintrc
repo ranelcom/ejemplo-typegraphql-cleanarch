@@ -1,0 +1,40 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "airbnb-base",
+    "airbnb-typescript/base"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module",
+    "project": "tsconfig.json"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "operator-linebreak": [
+      2,
+      "before", { "overrides": { "?": "after", ":": "after", "=": "after", "||": "after", "&&": "after", "-": "after"} }
+    ],
+    "no-param-reassign": [
+      2,
+      {
+        "props": false
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "@typescript-eslint/indent": "off",
+    "class-methods-use-this": "off",
+    "implicit-arrow-linebreak": "off",
+    "no-await-in-loop": "off",
+    "no-continue": "off",
+    "no-console": "off",
+    "import/no-dynamic-require": "off",
+    "object-curly-newline": "off"
+  }
+}
