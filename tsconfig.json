@@ -1,31 +1,57 @@
 {
-    "compilerOptions": {
-      "target": "es6",
-      "module": "commonjs",
-      "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
-      "sourceMap": true,
-      "outDir": "./dist",
-      "moduleResolution": "node",
-      "declaration": false,
-  
-      "composite": false,
-      "removeComments": true,
-      "noImplicitAny": true,
-      "strictNullChecks": true,
-      "strictFunctionTypes": true,
-      "noImplicitThis": true,
-      "noUnusedLocals": true,
-      "noUnusedParameters": true,
-      "noImplicitReturns": true,
-      "noFallthroughCasesInSwitch": true,
-      "allowSyntheticDefaultImports": true,
-      "esModuleInterop": true,
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true,
-      "skipLibCheck": true,
-      "baseUrl": ".",
-      "rootDir": "src"
-    },
-    "exclude": ["node_modules"],
-    "include": ["./src/**/*.tsx", "./src/**/*.ts"]
+  "compileOnsave": false,
+  "autoFixOnSave": true,
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "target": "ES5",
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "removeComments": true,
+    "strict": false,
+    "esModuleInterop": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "node",
+      "jest",
+      "reflect-metadata"
+    ],
+    "lib": [
+      "es2018"
+    ],
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "preserveConstEnums": true,
+    "forceConsistentCasingInFileNames": true,
+    "emitDecoratorMetadata": true,
+    "paths": {
+      "@root": [
+        "."
+      ],
+      "@infrastructure/*": [
+        "infrastructure/*"
+      ],
+      "@adapter/*": [
+        "infrastructure/adapter/*"
+      ],
+      "@util": [
+        "infrastructure/util"
+      ],
+      "@util/*": [
+        "infrastructure/util/*"
+      ],
+      "@application/*": [
+        "application/*"
+      ],
+      "@interface/*": [
+        "application/interface/*"
+      ],
+      "@domain/*": [
+        "domain/*"
+      ]
+    }
   }
+}
