@@ -1,4 +1,4 @@
-import DataSource from '../../../application/datasource';
+import DataSource from '@application/datasource';
 
 type Context = {
   datasource: DataSource,

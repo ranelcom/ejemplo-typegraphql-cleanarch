@@ -4,23 +4,17 @@ import { Connection } from 'typeorm';
 class MockConnection {
   private conn: Connection;
 
-  constructor(methods: any) {
+  constructor(id: string, methods: any) {
     this.conn = <any>{
-      getRepository: () => {
-        return methods;
-      },
+      getRepository: () => methods,
       manager: {
-        save: (entity: any) => Promise.resolve(),
+        save: () => Promise.resolve({ id }),
       },
     };
   }
 
   public async connect(): Promise<void> {
-    return;
-  }
-
-  public getConnection(): Connection {
-    return this.conn;
+    return null;
   }
 }
 

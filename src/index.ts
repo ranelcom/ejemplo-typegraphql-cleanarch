@@ -1,9 +1,9 @@
 import 'reflect-metadata';
-import { Connection } from 'typeorm';
-import { ApolloServer } from 'apollo-server-express';
-import { configServer } from './infrastructure/adapter/graphql/config';
-import User from './infrastructure/adapter/typeorm/user';
-import { connect } from './infrastructure/adapter/typeorm/connection';
+import { TypeORMConnection, TypeORMUserAdapter } from '@adapter/typeorm';
+import Server from '@infrastructure/apollo';
+// Application dependencies
+import { IHTTPServer } from '@interface/http';
+import UserUseCase from './application/user-case/user';
 import DataSource from './application/datasource';
 
 require('dotenv').config();
@@ -20,24 +20,41 @@ if (PORT == null || PORT === '') {
   process.exit(1);
 }
 
-let server: ApolloServer;
-let dbConnection: Connection;
+let server: IHTTPServer;
 
 const main = async () => {
-  dbConnection = await connect();
+  const typeormConnection = new TypeORMConnection();
+  await typeormConnection.connect();
+
+  const userStorageAdapter = new TypeORMUserAdapter(
+    typeormConnection,
+  );
+  await userStorageAdapter.setup();
+
+  /*
+  const datasource: DataSource = {
+    user: new User(typeormConnection.getConnection()),
+  };
+  */
+
+  /*
+  server = await configServer(4000, datasource);
+  */
+  const userUseCase = new UserUseCase(userStorageAdapter);
 
   const datasource: DataSource = {
-    user: new User(dbConnection),
+    user: userUseCase,
   };
 
-  server = await configServer(4000, datasource);
+  server = new Server('4000', datasource);
+
+  // server = new Server(4000, datasource);
 };
 
 const signCallback = async () => {
   console.log('SIGN received');
 
   try {
-    await dbConnection.close();
     await server.stop();
   } catch (err) {
     console.log('Error while stop and halting server on SIGINT ', err);

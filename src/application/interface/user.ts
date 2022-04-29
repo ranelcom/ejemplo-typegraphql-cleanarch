@@ -1,9 +1,13 @@
-import User from '../../domain/user';
-import UserInput from '../../domain/user-input';
+import User from '@domain/user';
+import UserInput from '@domain/user-input';
 
-interface IUserAdapter {
+interface IUserUseCase {
     // Create an user
     create(data: UserInput): Promise<User>
 }
 
-export { IUserAdapter };
+interface IUserAdapter {
+    create(data: UserInput): Promise<User>
+}
+
+export { IUserUseCase, IUserAdapter };

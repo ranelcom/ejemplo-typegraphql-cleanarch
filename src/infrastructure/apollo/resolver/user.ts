@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { Resolver, Query, Mutation, Arg, Ctx } from 'type-graphql';
 import bcrypt from 'bcryptjs';
 
@@ -5,15 +6,16 @@ import Context from '../context';
 import User from '../type/user';
 import { UserInput } from '../type/user-input';
 
-@Resolver()
-export class UserResolver {
+@Resolver(() =>
+  UserInput)
+export default class {
   @Query(() => String)
-  async hello() {
+  public async hello() {
     return 'Hello World!';
   }
 
   @Mutation(() => User)
-  async register(
+  public async register(
     @Arg('data', () => UserInput) data: UserInput,
     @Ctx() context: Context,
   ): Promise<User> {

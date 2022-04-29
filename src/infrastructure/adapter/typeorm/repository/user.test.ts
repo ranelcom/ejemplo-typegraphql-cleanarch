@@ -1,6 +1,6 @@
 import UserInput from '../../../../domain/user-input';
-import UserAdapter from '../user';
-import { MockConnection } from '../mock/connection';
+import UserAdapter from './user';
+import { MockConnection } from '../connection.test';
 import { User } from '../entity/user';
 
 describe('Infrastructure:', () => {
