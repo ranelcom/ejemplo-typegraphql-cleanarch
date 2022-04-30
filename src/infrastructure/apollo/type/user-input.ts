@@ -1,7 +1,7 @@
 import { IsEmail, Length } from 'class-validator';
 import { Field, InputType } from 'type-graphql';
-import { IsEmailAlreadyExist } from '../../util/isEmailAlreadyExist';
-import UserInputDomain from '../../../../domain/user-input';
+import { IsEmailAlreadyExist } from '../../adapter/util/isEmailAlreadyExist';
+import UserInputDomain from '../../../domain/user-input';
 
 @InputType()
 export class UserInput {

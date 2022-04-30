@@ -1,8 +1,8 @@
-import 'reflect-metadata';
-import { TypeORMConnection, TypeORMUserAdapter } from '@adapter/typeorm';
+import 'module-alias/register';
 import Server from '@infrastructure/apollo';
 // Application dependencies
 import { IHTTPServer } from '@interface/http';
+import { TypeORMConnection, TypeORMUserAdapter } from '@adapter/typeorm';
 import UserUseCase from './application/user-case/user';
 import DataSource from './application/datasource';
 
@@ -23,13 +23,17 @@ if (PORT == null || PORT === '') {
 let server: IHTTPServer;
 
 const main = async () => {
+  console.log('Conectando TypeORMConnection');
   const typeormConnection = new TypeORMConnection();
   await typeormConnection.connect();
+  console.log('Listo TypeORMConnection');
 
+  console.log('Configurando TypeORMUserAdapter');
   const userStorageAdapter = new TypeORMUserAdapter(
     typeormConnection,
   );
   await userStorageAdapter.setup();
+  console.log('Listo TypeORMUserAdapter');
 
   /*
   const datasource: DataSource = {
@@ -40,13 +44,20 @@ const main = async () => {
   /*
   server = await configServer(4000, datasource);
   */
+  console.log('Creando UserUseCase');
   const userUseCase = new UserUseCase(userStorageAdapter);
+  console.log('Listo UserUseCase');
 
+  console.log('Creando DataSource');
   const datasource: DataSource = {
     user: userUseCase,
   };
+  console.log('Listo DataSource');
 
-  server = new Server('4000', datasource);
+  server = new Server(PORT, datasource);
+  await server.setup();
+  await server.start();
+  console.info(`🚀 app running at port: ${PORT}`);
 
   // server = new Server(4000, datasource);
 };
