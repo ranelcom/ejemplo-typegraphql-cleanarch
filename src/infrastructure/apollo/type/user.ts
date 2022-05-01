@@ -1,8 +1,9 @@
+import 'reflect-metadata';
 import { Field, ObjectType, ID } from 'type-graphql';
 import { PrimaryGeneratedColumn } from 'typeorm';
 
 @ObjectType({ description: 'Object representing a user' })
-export default class {
+export class UserType {
   @Field(() => ID)
   @PrimaryGeneratedColumn('uuid')
   id: string;

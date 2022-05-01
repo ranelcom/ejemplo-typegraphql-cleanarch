@@ -1,20 +1,21 @@
 import 'reflect-metadata';
 import { Resolver, Query, Mutation, Arg, Ctx } from 'type-graphql';
+import User from '@domain/user';
 import bcrypt from 'bcryptjs';
 
 import Context from '../context';
-import User from '../type/user';
+import { UserType } from '../type/user';
 import { UserInput } from '../type/user-input';
 
 @Resolver(() =>
-  UserInput)
+  UserType)
 export default class {
   @Query(() => String)
   public async hello() {
     return 'Hello World!';
   }
 
-  @Mutation(() => User)
+  @Mutation(() => UserType)
   public async register(
     @Arg('data', () => UserInput) data: UserInput,
     @Ctx() context: Context,

@@ -4,7 +4,7 @@
 # -----------------------------------------------
 
 type Mutation {
-  register(data: UserInput!): default_1!
+  register(data: UserInput!): UserType!
 }
 
 type Query {
@@ -19,7 +19,7 @@ input UserInput {
 }
 
 """Object representing a user"""
-type default_1 {
+type UserType {
   email: String!
   firstName: String!
   id: ID!
