@@ -11,6 +11,8 @@ install:
 	@npm run dev
 
 dev:
+	@docker-compose up -d
+	@npm run dev
 	@npm run dev
 
 #

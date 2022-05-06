@@ -22,10 +22,8 @@ export default class {
   ): Promise<User> {
     const hashedPassword = await bcrypt.hash(data.password, 12);
     data.password = hashedPassword;
-
     const user = await context.datasource.user
       .create(data.toDomain());
-
     return user;
   }
 }

@@ -1,5 +1,5 @@
 import { createConnection, Connection } from 'typeorm';
-import { User } from './entity/user';
+import { UserModel } from './entity';
 
 export interface IConnection {
   connect(): Promise<void>;
@@ -21,7 +21,7 @@ export default class implements IConnection {
       database: 'typegraphql-example',
       synchronize: true,
       logging: true,
-      entities: [User],
+      entities: [UserModel],
     });
   }
 

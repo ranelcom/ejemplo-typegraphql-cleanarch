@@ -5,13 +5,13 @@ import {
   ValidatorConstraintInterface,
 } from 'class-validator';
 
-import { User } from '../typeorm/entity/user';
+import UserModel from '../typeorm/entity/user';
 
 @ValidatorConstraint({ async: true })
 export class IsEmailAlreadyExistConstraint
   implements ValidatorConstraintInterface {
   validate(email: string) {
-    return User.findOne({ where: { email } }).then((user) => {
+    return UserModel.findOne({ where: { email } }).then((user) => {
       if (user) return false;
       return true;
     });

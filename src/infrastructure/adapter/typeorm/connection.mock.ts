@@ -1,7 +1,8 @@
-// Application dependencies.
+// application dependencies
 import { Connection } from 'typeorm';
+import { IConnection } from './connection';
 
-class MockConnection {
+export default class MockConnection implements IConnection {
   private conn: Connection;
 
   constructor(id: string, methods: any) {
@@ -16,6 +17,12 @@ class MockConnection {
   public async connect(): Promise<void> {
     return null;
   }
-}
 
-export { MockConnection };
+  public getConnection(): Connection {
+    return this.conn;
+  }
+
+  public close(): Promise<void> {
+    return null;
+  }
+}
