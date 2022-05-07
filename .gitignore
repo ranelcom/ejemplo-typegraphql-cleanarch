@@ -21,3 +21,6 @@ asset/structurizr/images
 asset/structurizr/logs
 asset/structurizr/eula.*
 asset/structurizr/.structurizr/
+
+.vscode
+/coverage
